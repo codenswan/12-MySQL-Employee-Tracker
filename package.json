@@ -1,0 +1,29 @@
+{
+  "name": "12-mysql-employee-tracker",
+  "version": "1.0.0",
+  "description": "Content Management System",
+  "main": "employeeTracker.js",
+  "scripts": {
+    "start": "node employeeTracker.js",
+    "dev": "nodemon employeeTracker.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codenswan/12-MySQL-Employee-Tracker.git"
+  },
+  "keywords": [
+    "CMS",
+    "Express",
+    "MySQL"
+  ],
+  "author": "Dan Swan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codenswan/12-MySQL-Employee-Tracker/issues"
+  },
+  "homepage": "https://github.com/codenswan/12-MySQL-Employee-Tracker#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  }
+}
