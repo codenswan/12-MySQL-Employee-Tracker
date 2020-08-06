@@ -1,5 +1,6 @@
 const express = require('express');
 const mysql = require('mysql');
+const cTable = require('console.table');
 
 const app = express();
 
