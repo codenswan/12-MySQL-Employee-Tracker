@@ -1,31 +1,47 @@
-const db = require('./models');
+const db = require("./models");
 const questions = require("./utils/questions.js");
+const validation = require("./utils/validation.js");
 const { prompt } = require("inquirer");
-
-const cTable = require("console.table");
 const chalk = require("chalk");
 const clear = require("clear");
 const figlet = require("figlet");
+const connection = require("./models/connection.js");
 
-// clear();
+clear();
 console.log(
-  chalk.yellow(figlet.textSync("Staff Database", { horizontalLayout: "full" }))
+  chalk.red(figlet.textSync("Staff Database", { horizontalLayout: "full" }))
 );
 
 function init() {
-  prompt(questions.startQuestions).then((answer) => {
-  switch (answer) {
-    case value: "viewAll";
-      db.findAllEmployees(); 
-    break;
-    
-    default: 
-    break;
-  }
-}) 
+  prompt(questions.startQuestions).then( async (answer) => {
+    switch (answer.menu) {
+      case "viewAllEmps":
+        await db.findAllEmployees();
+        init();
+        clear();
+        break;
+
+      case "viewAllDeps":
+        await db.findAllDepartments();
+        init();
+        clear();
+        break;
+
+      case "viewAllRoles":
+        await db.findAllRoles();
+        init();
+        clear();
+        break;
+
+      case "addNewRole":
+        await db.addRole();
+        init();
+        clear();
+        break;
+
+        
+    }
+  });
 };
 
-// prompt(questions.addEmployee).then((answer1) => {
-//   db.findAllEmployees();
-// });
 init();
