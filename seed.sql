@@ -24,3 +24,12 @@ VALUES
     ("Monica", "Smith", 2, NULL),
     ("Samwise", "Gamgee", 5, 4),
     ("Tom", "Bombadil", 6, 7);
+
+    INSERT INTO employees
+    (first_name, last_name, role_id, manager_id)
+VALUES
+    ('Jeremy', 'Collins', 1, null),
+    ('Jacob', 'Crosley', 3, 3),
+    ('Matthew', 'Foster', 1, null),
+    ('Kevin', 'Dingle', 2, null),
+    ('Kelli', 'Mattingly', 4, 4);
