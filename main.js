@@ -5,7 +5,6 @@ const { prompt } = require("inquirer");
 const chalk = require("chalk");
 const clear = require("clear");
 const figlet = require("figlet");
-const connection = require("./models/connection.js");
 
 clear();
 console.log(
