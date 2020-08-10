@@ -12,7 +12,7 @@ console.log(
 );
 
 function init() {
-  prompt(questions.startQuestions).then( async (answer) => {
+  prompt(questions.startQuestions).then(async (answer) => {
     switch (answer.menu) {
       case "viewAllEmps":
         await db.findAllEmployees();
@@ -31,16 +31,23 @@ function init() {
         init();
         clear();
         break;
+      
+      case "addNewEmployee":
+        await db.addEmployee();
 
+      case "addNewDepartment":
+        await db.addDepartment();
+        init();
+        clear();
+        break;
+      
       case "addNewRole":
         await db.addRole();
         init();
         clear();
         break;
-
-        
     }
   });
-};
+}
 
 init();
