@@ -36,8 +36,54 @@ class DB {
 
     this.connection.query(query, (err, res) => {
       if (err) throw err;
-      console.log("============================");
       console.table(res);
+    });
+  }
+
+  addEmployee() {
+    let [rows, fields] = this.connection
+      .execute(`Select id, name FROM departments ORDER BY name ASC;`)
+    
+    let depList = rows.map((row) => {
+          return row.name;
+        });
+    
+    console.log(depList);
+
+    // return prompt([
+    //   {
+    //     type: "input",
+    //     name: "firstName",
+    //     message: "What is the first name of the employee?",
+    //     validation: validation.stringCapital,
+    //   },
+    //   {
+    //     type: "input",
+    //     name: "lastName",
+    //     message: "What is the last name of the employee?",
+    //     validation: validation.stringCapital,
+    //   },
+    //   {
+    //     type: "list",
+    //     name: "department",
+    //     choices: depList,
+    //   },
+    // ]);
+  }
+
+  addDepartment() {
+    return prompt([
+      {
+        type: "input",
+        name: "newDep",
+        message: "Enter the name of the new department:",
+      },
+    ]).then((answer) => {
+      let query = `INSERT INTO departments (name) VALUES ('${answer.newDep}');`;
+      this.connection.query(query, (err, res) => {
+        if (err) throw err;
+      });
+      console.log(`Adding ${answer.newDep} into departments table.`);
     });
   }
 
@@ -45,11 +91,10 @@ class DB {
     const query = `Select id, name FROM departments ORDER BY name ASC;`;
     return this.connection.query(query, (err, departments) => {
       if (err) throw err;
-      
       let depList = departments.map((row) => {
         return row.name;
       });
-      
+
       prompt([
         {
           type: "input",
@@ -71,13 +116,11 @@ class DB {
       ]).then((answer) => {
         for (let index = 0; index < departments.length; index++) {
           if (departments[index].name === answer.department) {
-            answer.department_id = departments[index].id
+            answer.department_id = departments[index].id;
           }
         }
-         
-        // console.log(answer.role, answer.salary, answer.department_id);
-        
-        let query2 = 'INSERT INTO roles set ?;'
+
+        let query2 = "INSERT INTO roles set ?;";
         const values = {
           title: answer.role,
           salary: answer.salary,
@@ -86,8 +129,7 @@ class DB {
         this.connection.query(query2, values, (err, res) => {
           if (err) throw err;
         });
-        console.log(`Adding ${answer.role}`);
-        
+        console.log(`Adding ${answer.role} to roles table.`);
       });
     });
   }
