@@ -27,3 +27,5 @@ const number = (number) => {
   let valid = !isNaN(parseFloat(number));
   return valid || "!    Please enter a number.";
 };
+
+module.exports = { number, string, stringCapital };
