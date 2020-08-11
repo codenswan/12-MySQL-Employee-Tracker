@@ -76,12 +76,14 @@ class DB {
       },
     ]).then((answer) => {
       let query = "INSERT INTO employees set ?;";
-      let values = [{
-        first_name: answer.firstName,
-        last_name: answer.lastName,
-        role_id: answer.role,
-        manager_id: answer.mgr,
-      }];
+      let values = [
+        {
+          first_name: answer.firstName,
+          last_name: answer.lastName,
+          role_id: answer.role,
+          manager_id: answer.mgr,
+        },
+      ];
       this.connection.query(query, values, (err) => {
         if (err) throw err;
       });
@@ -135,18 +137,20 @@ class DB {
       },
     ]).then((answer) => {
       let query2 = "INSERT INTO roles set ?;";
-      const values = [{
-        title: answer.role,
-        salary: answer.salary,
-        department_id: answer.department,
-      }];
-      this.connection.query(query2, values, err => {
+      const values = [
+        {
+          title: answer.role,
+          salary: answer.salary,
+          department_id: answer.department,
+        },
+      ];
+      this.connection.query(query2, values, (err) => {
         if (err) throw err;
       });
       console.log(`Adding ${answer.role} to roles table.`);
     });
   }
-
+  //todo update function not working
   async updateEmployeeRole() {
     let empQuery = `SELECT employees.id, concat(employees.first_name, ' ' ,  employees.last_name) AS Employee FROM employees ORDER BY Employee ASC;`;
     let emps = await this.connection.query(empQuery);
@@ -175,10 +179,12 @@ class DB {
       },
     ]).then((answer) => {
       let updateQuery = "UPDATE employees SET role_id = ? WHERE id = ?;";
-      let values = {
-        role_id: answer.roles,
-        id: answer.emps,
-      };
+      let values = [
+        {
+          role_id: answer.roles,
+          id: answer.emps,
+        },
+      ];
       this.connection.query(updateQuery, values, (err) => {
         if (err) throw err;
       });
@@ -187,7 +193,13 @@ class DB {
   }
 
   async updateEmployeeMgr() {
-    let mgrQuery = `SELECT employees.id, concat(employees.first_name, ' ' ,  employees.last_name) AS Manager FROM employees ORDER BY Manager ASC;`;
+    let empQuery = "SELECT employees.id, concat(employees.first_name, ' ' ,  employees.last_name) AS Employee FROM employees ORDER BY Employee ASC;";
+    let emps = await this.connection.query(empQuery);
+    let emplist = emps[0].map((row) => {
+      return { name: row.Employee, value: row.id };
+    });
+
+    let mgrQuery = "SELECT employees.id, concat(employees.first_name, ' ' ,  employees.last_name) AS Manager FROM employees ORDER BY Manager ASC;";
     let mgrs = await this.connection.query(mgrQuery);
     let mgrsList = mgrs[0].map((row) => {
       return { name: row.Manager, value: row.id };
@@ -196,12 +208,29 @@ class DB {
     return prompt([
       {
         type: "list",
-        message: "Who is their new manager?",
-        choice: mgrsList,
+        name: "emps",
+        message: "Please select the employee to update:",
+        choices: emplist,
       },
-    ]).then( answer => {console.log(answer);})
+      {
+        type: "list",
+        name: "mgr",
+        message: "Who is their new manager?",
+        choices: mgrsList,
+      },
+    ]).then((answer) => {
+     this.connection.query(
+        `UPDATE employees SET manager_id = ${answer.mgr} WHERE id = ${answer.emps};`, (err) => {
+          if (err) throw err;
+        }
+      );
+      console.log(`Changing employee's manager.`);
+    });
   }
 
+  async endApplication() {
+    await this.connection.end();
+  }
 }
 
 module.exports = new DB(connection);
