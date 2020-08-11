@@ -38,7 +38,6 @@ function init() {
       case "addNewDepartment":
         await db.addDepartment();
         init();
-        clear();
         break;
 
       case "addNewRole":
@@ -47,9 +46,16 @@ function init() {
         break;
       
       case "updateEmpRole":
-        await db.updateEmployee();
+        await db.updateEmployeeRole();
         init();
         break;
+      
+      case "updateEmpMgr":
+        await updateEmployeeMgr(); 
+        
+      case "endApp":
+        await endApplication();
+    
     }
   });
 }
