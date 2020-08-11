@@ -135,11 +135,11 @@ class DB {
       },
     ]).then((answer) => {
       let query2 = "INSERT INTO roles set ?;";
-      const values = {
+      const values = [{
         title: answer.role,
         salary: answer.salary,
         department_id: answer.department,
-      };
+      }];
       this.connection.query(query2, values, err => {
         if (err) throw err;
       });
