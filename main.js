@@ -51,10 +51,13 @@ function init() {
         break;
       
       case "updateEmpMgr":
-        await updateEmployeeMgr(); 
-        
+        await db.updateEmployeeMgr();
+        init();
+        break;
+      
       case "endApp":
-        await endApplication();
+        await db.endApplication();
+        break;
     
     }
   });
