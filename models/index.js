@@ -178,28 +178,26 @@ class DB {
         choices: rolesList,
       },
     ]).then((answer) => {
-      let updateQuery = "UPDATE employees SET role_id = ? WHERE id = ?;";
-      let values = [
-        {
-          role_id: answer.roles,
-          id: answer.emps,
-        },
-      ];
-      this.connection.query(updateQuery, values, (err) => {
-        if (err) throw err;
-      });
+      this.connection.query(
+        `UPDATE employees SET role_id = ${answer.roles} WHERE id = ${answer.emps};`,
+        (err) => {
+          if (err) throw err;
+        }
+      );
       console.log(`Changing employee's role.`);
     });
   }
 
   async updateEmployeeMgr() {
-    let empQuery = "SELECT employees.id, concat(employees.first_name, ' ' ,  employees.last_name) AS Employee FROM employees ORDER BY Employee ASC;";
+    let empQuery =
+      "SELECT employees.id, concat(employees.first_name, ' ' ,  employees.last_name) AS Employee FROM employees ORDER BY Employee ASC;";
     let emps = await this.connection.query(empQuery);
     let emplist = emps[0].map((row) => {
       return { name: row.Employee, value: row.id };
     });
 
-    let mgrQuery = "SELECT employees.id, concat(employees.first_name, ' ' ,  employees.last_name) AS Manager FROM employees ORDER BY Manager ASC;";
+    let mgrQuery =
+      "SELECT employees.id, concat(employees.first_name, ' ' ,  employees.last_name) AS Manager FROM employees ORDER BY Manager ASC;";
     let mgrs = await this.connection.query(mgrQuery);
     let mgrsList = mgrs[0].map((row) => {
       return { name: row.Manager, value: row.id };
@@ -219,8 +217,9 @@ class DB {
         choices: mgrsList,
       },
     ]).then((answer) => {
-     this.connection.query(
-        `UPDATE employees SET manager_id = ${answer.mgr} WHERE id = ${answer.emps};`, (err) => {
+      this.connection.query(
+        `UPDATE employees SET manager_id = ${answer.mgr} WHERE id = ${answer.emps};`,
+        (err) => {
           if (err) throw err;
         }
       );
