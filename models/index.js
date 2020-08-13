@@ -1,9 +1,8 @@
 const connection = require("./connection.js");
-const validation = require("./../utils/validation.js");
 const { prompt } = require("inquirer");
 
 class DB {
-  // Keeping a reference to the connection on the class in case we need it later
+  //* Keeping a reference to the connection on the class in case we need it later
   constructor(connection) {
     connection().then((connection) => {
       this.connection = connection;
@@ -54,13 +53,11 @@ class DB {
         type: "input",
         name: "firstName",
         message: "What is the first name of the employee?",
-        validation: validation.stringCapital,
       },
       {
         type: "input",
         name: "lastName",
         message: "What is the last name of the employee?",
-        validation: validation.stringCapital,
       },
       {
         type: "list",
@@ -109,7 +106,7 @@ class DB {
       console.log(`Adding ${answer.newDep} into departments table.`);
     });
   }
-
+ //* method for adding a new role.
   async addRole() {
     const query = `Select id, name FROM departments ORDER BY name ASC;`;
     let deps = await this.connection.query(query);
@@ -122,13 +119,11 @@ class DB {
         type: "input",
         name: "role",
         message: "Enter the title of the new role:",
-        validation: validation.string,
       },
       {
         type: "input",
         name: "salary",
         message: "Enter the employee's salary",
-        validation: validation.number,
       },
       {
         type: "list",
@@ -150,7 +145,8 @@ class DB {
       console.log(`Adding ${answer.role} to roles table.`);
     });
   }
-  //todo update function not working
+
+  //* method for updating the employee role
   async updateEmployeeRole() {
     let empQuery = `SELECT employees.id, concat(employees.first_name, ' ' ,  employees.last_name) AS Employee FROM employees ORDER BY Employee ASC;`;
     let emps = await this.connection.query(empQuery);
@@ -188,6 +184,7 @@ class DB {
     });
   }
 
+  //* method for updating the employee manager
   async updateEmployeeMgr() {
     let empQuery =
       "SELECT employees.id, concat(employees.first_name, ' ' ,  employees.last_name) AS Employee FROM employees ORDER BY Employee ASC;";
@@ -225,6 +222,18 @@ class DB {
       );
       console.log(`Changing employee's manager.`);
     });
+  }
+
+  async deleteEmployee() {
+    let empQuery = `SELECT employees.id, concat(employees.first_name, ' ' ,  employees.last_name) AS Employee FROM employees ORDER BY Employee ASC;`;
+    let emps = await this.connection.query(empQuery);
+    let emplist = emps[0].map((row) => {
+      return { name: row.Employee, value: row.id };
+    });
+
+
+
+
   }
 
   async endApplication() {
