@@ -224,18 +224,6 @@ class DB {
     });
   }
 
-  async deleteEmployee() {
-    let empQuery = `SELECT employees.id, concat(employees.first_name, ' ' ,  employees.last_name) AS Employee FROM employees ORDER BY Employee ASC;`;
-    let emps = await this.connection.query(empQuery);
-    let emplist = emps[0].map((row) => {
-      return { name: row.Employee, value: row.id };
-    });
-
-
-
-
-  }
-
   async endApplication() {
     await this.connection.end();
   }
