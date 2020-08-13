@@ -5,6 +5,7 @@ This project was developed by [codenswan](https://github.com/codenswan).
 ### Table of Contents
 * [Description](#Description)
 * [Install Instructions](#Installation)
+* [Dependencies](#Dependencies)
 * [Usage](#Usage)
 * [License](#License)
 * [Contribution](#Contribution)
