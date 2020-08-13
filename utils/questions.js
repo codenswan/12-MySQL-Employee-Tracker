@@ -17,4 +17,5 @@ const startQuestions = [
   },
 ];
 
+//* main menu questions exported to main.js
 module.exports = { startQuestions };

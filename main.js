@@ -1,22 +1,25 @@
-const db = require("./models");
-const questions = require("./utils/questions.js");
+const db = require("./models"); //* db here imports the class methods
+const questions = require("./utils/questions.js"); //* imports the questions for the main menu
 const { prompt } = require("inquirer");
 const chalk = require("chalk");
 const clear = require("clear");
 const figlet = require("figlet");
 
 clear();
+//* this module displays the app banner in conole on entry point command "npm start"
 console.log(
   chalk.red(figlet.textSync("Staff Database", { horizontalLayout: "full" }))
 );
 
+//* main menu function
 function init() {
+  //* displays menu questions 
   prompt(questions.startQuestions).then(async (answer) => {
     clear();
+    //* switch calls db methods depending on user's answer. Once promise is resolved, the main menu runs again 
     switch (answer.menu) {
       case "viewAllEmps":
         await db.findAllEmployees();
-       
         init();
         break;
 
@@ -58,7 +61,6 @@ function init() {
       case "endApp":
         await db.endApplication();
         break;
-    
     }
   });
 }
