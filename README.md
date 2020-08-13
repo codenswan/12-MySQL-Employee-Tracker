@@ -1,7 +1,5 @@
 # 12-MySQL-Employee-Tracker
 
-# 12-MySQL-Employee-Tracker
-
 This project was developed by [codenswan](https://github.com/codenswan).
 
 ### Table of Contents
@@ -61,4 +59,8 @@ For the information on markdown formatting I consulted the following [guide](htt
 ---
 ## Questions:
 Developed by codenswan. 
+<<<<<<< HEAD
 If you have any further questions please contact me at [rodger.swan@gmail.com](mailto:rodger.swan@gmail.com).
+=======
+If you have any further questions please contact me at [rodger.swan@gmail.com](mailto:rodger.swan@gmail.com).
+>>>>>>> e049335847a3728ee7bdd080aac606eac2bf9ef7
