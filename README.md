@@ -16,13 +16,15 @@ This is command-line application that uses inquirer to generate a readme file.
 
 ## Installation:
 Don't forget to run the following command in order to install dependencies.
-    npm install
+```    
+npm install
+```
     
 ## Dependencies:
 The dependencies used by this app include:
 + chalk: 4.1.0,
 + clear: 0.1.0,
-+ figlet": 1.5.0,
++ figlet: 1.5.0,
 + inquirer: 7.3.3,
 + mysql2": 2.1.0
 
@@ -30,7 +32,7 @@ The dependencies used by this app include:
 The entry point for the application is through the command 
 
 ```
-node index.js
+npm start
 ```
 
 Here are some screenshots of the application. 
