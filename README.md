@@ -10,7 +10,7 @@ This project was developed by [codenswan](https://github.com/codenswan).
 * [Questions](#Questions)
 
 ## Description:
-This is command-line application that uses inquirer to generate a readme file.
+This application is staff database used to track employees, departments and roles.
 
 ## Installation:
 Don't forget to run the following command in order to install dependencies.
