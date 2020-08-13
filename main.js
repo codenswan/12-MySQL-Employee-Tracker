@@ -6,9 +6,9 @@ const clear = require("clear");
 const figlet = require("figlet");
 
 clear();
-// console.log(
-//   chalk.red(figlet.textSync("Staff Database", { horizontalLayout: "full" }))
-// );
+console.log(
+  chalk.red(figlet.textSync("Staff Database", { horizontalLayout: "full" }))
+);
 
 function init() {
   prompt(questions.startQuestions).then(async (answer) => {
